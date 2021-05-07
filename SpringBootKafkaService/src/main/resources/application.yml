@@ -1,0 +1,33 @@
+kafka:
+   bootstrap-servers: localhost:9092
+   
+server:
+  port: 8081
+
+
+spring:
+   kafka:
+     consumer:
+        bootstrap-servers: ${kafka.bootstrap-servers}
+        group-id: group_id
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+     producer:
+        bootstrap-servers: ${kafka.bootstrap-servers}
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        
+kafka-configuration:
+    bootstrap-servers: ${kafka.bootstrap-servers}
+    topic_name: first_topic
+    topic-names-to-create: 
+        - first_topic
+    num-of-partitions: 1
+    replication-factor: 1   
+    
+kafka-retry:
+    max-retry-attempts: 2
+    retry-interval: 1000
+    retry-multiplier: 2
+        
